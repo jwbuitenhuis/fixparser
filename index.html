@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="public/app.css">
+</head>
+<body ng-app="myApp">
+    <div ng-controller="MainController">
+        <textarea ng-model="input">
+        </textarea>
+        <br/>
+        <button ng-click="parse()">parse</button>
+        <button ng-click="speedTest()">run speed test</button>
+        Average parsing time (microseconds): {{averageParseTime}}
+        <table>
+            <tr>
+                <th>MsgSeqNum</th>
+                <th>MsgType</th>
+                <th>From</th>
+                <th>To</th>
+                <th>SendingTime</th>
+                <th>Client Order ID</th>
+                <th>MsgDetail</th>
+            </tr>
+            <tr ng-repeat="row in output">
+                <td>{{row.MsgSeqNum}}</td>
+                <td>{{row.MsgType}}</td>
+                <td>{{row.SenderCompID}}</td>
+                <td>{{row.TargetCompID}}</td>
+                <td>{{row.SendingTime}}</td>
+                <td>{{row.ClOrdID}}</td>
+                <td><pre>{{row | json}}</pre></td>
+            </tr/>
+        </table>
+    </div>
+    <!-- inject:js -->
+    <script src="/bower_components/underscore/underscore.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/src/js/fixparser.js"></script>
+    <script src="/src/js/app.js"></script>
+    <script src="/src/js/fixLookupTable.js"></script>
+    <!-- endinject -->
+
+</body>
+</html>
